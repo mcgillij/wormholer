@@ -1,0 +1,37 @@
+[project]
+name = "eve-wormhole"
+version = "0.1.0"
+description = "A floating clipboard helper for EVE Online wormhole bookmarks"
+readme = "README.md"
+authors = [
+    { name = "mcgillij", email = "mcgillivray.jason@gmail.com" }
+]
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "pyside6>=6.11.2",
+]
+
+[project.scripts]
+eve-wormhole = "eve_wormhole.app:main"
+
+[build-system]
+requires = ["uv_build>=0.9.18,<0.10.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["--import-mode=importlib", "-ra"]
+qt_api = "pyside6"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-qt>=4.5.0",
+    "ruff>=0.16.7",
+]

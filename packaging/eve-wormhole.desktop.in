@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Wormhole bookmarks
+Comment=Format EVE Online wormhole bookmarks from pasted information
+Exec="@PROJECT_DIR@/.venv/bin/eve-wormhole"
+Path=@PROJECT_DIR@
+Icon=edit-paste
+Terminal=false
+Categories=Game;
+StartupNotify=true
+StartupWMClass=eve-wormhole
