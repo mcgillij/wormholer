@@ -16,6 +16,20 @@ def test_sample_preserves_missing_information(sample):
     assert not result.errors
 
 
+def test_captured_description_variants(description_variant):
+    source, candidates, size, lifetime = description_variant
+    result = parse_paste(source)
+    assert result.values == {
+        "space_type": candidates[0] if len(candidates) == 1 else "",
+        "size": size,
+        "lifetime": lifetime,
+        "mass": "",
+    }
+    assert result.candidates == candidates
+    assert not result.issues
+    assert not result.errors
+
+
 @pytest.mark.parametrize(
     ("source", "field", "value"),
     [
@@ -36,6 +50,7 @@ def test_identifiers(source, field, value):
     [
         ("High Security", ("HS",)),
         ("Low-Security space", ("LS",)),
+        ("Low-security systems", ("LS",)),
         ("Null Security", ("NS",)),
         ("Class 1 wormhole systems", ("C1",)),
         ("Class 2 wormhole systems", ("C2",)),

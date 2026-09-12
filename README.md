@@ -49,8 +49,11 @@ Enable **Leads home** for `--YRU C2iL 533 EOL`. Destination labels are preserved
 the app does not shorten J-numbers automatically. `Class 1-3` requires an exact
 class selection and is never interpreted as `C13`.
 
-The parser currently accepts the English labeled descriptions in the planning
-document. It recognizes full `ABC-123` signatures in scan-result rows, wormhole
+The parser accepts English labeled descriptions, including `High-security systems`,
+`Low-security systems`, and `Null-security systems`. `Less than 1 day remaining`
+is a resolved lifetime with no flag; `Less than 4 hours remaining` produces `EOL`.
+Paste one description at a time; a block containing several descriptions is rejected.
+It recognizes full `ABC-123` signatures in scan-result rows, wormhole
 types, and standalone J-numbers. It does not infer a destination system from K162
 or look up other wormhole types yet. Use the controls for information not supplied
 by the paste. The outgoing/unsure direction defaults to `o`; K162 supplies `i`.

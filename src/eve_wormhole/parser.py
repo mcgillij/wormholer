@@ -15,10 +15,13 @@ SIZE_NAMES = {"small": "S", "medium": "M", "large": "L", "extra large": "XL"}
 SPACE_NAMES = {
     "high security": "HS",
     "high security space": "HS",
+    "high security systems": "HS",
     "low security": "LS",
     "low security space": "LS",
+    "low security systems": "LS",
     "null security": "NS",
     "null security space": "NS",
+    "null security systems": "NS",
     "triglavian space": "PV",
     "pochven": "PV",
     "drifter wormhole systems": "DR",
@@ -61,7 +64,11 @@ def _lifetime(value: str) -> str | None:
         match[1]
     ) >= 4:
         return ""
-    if value in ("more than 1 day remaining", "more than a day remaining"):
+    if value in (
+        "less than 1 day remaining",
+        "more than 1 day remaining",
+        "more than a day remaining",
+    ):
         return ""
     return None
 

@@ -53,6 +53,31 @@ def test_paste_fill_and_auto_copy(qtbot, window, sample):
     assert window.paste_edit.toPlainText() == "YRU-123"
 
 
+def test_captured_descriptions_copy_after_missing_fields_are_filled(
+    qtbot, window, description_variant
+):
+    source, candidates, size, lifetime = description_variant
+    paste(qtbot, window, source)
+    assert not window.state.issues
+    assert not window.copy_button.isEnabled()
+    assert window.clipboard.text() == source
+    paste(qtbot, window, "Wormhole K162")
+    paste(qtbot, window, "YRU-123")
+    if len(candidates) > 1:
+        space_type = window.inputs["space_type"]
+        space_type.setCurrentIndex(space_type.findData(candidates[0]))
+    assert not window.copy_button.isEnabled()
+    destination = window.inputs["destination"]
+    destination.setFocus()
+    qtbot.keyClicks(destination, "533")
+    expected = f"-YRU {candidates[0]}i{size} 533"
+    if lifetime:
+        expected += f" {lifetime}"
+    assert window.clipboard.text() == expected
+    assert window.copy_button.isEnabled()
+    assert window.status.text() == "Copied · ready to paste in EVE"
+
+
 def test_last_text_field_copies_without_tab_or_focus_change(qtbot, window, sample):
     fill(qtbot, window, sample, commit=False)
     assert window.inputs["destination"].hasFocus()
